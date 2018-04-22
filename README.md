@@ -9,7 +9,7 @@ mvn clean package
 ```
 
 ```text
-java -jar .\target\demo-security-jwt-spring2-0.0.0-SNAPSHOT.jar
+java -jar .\target\demo-security-jwt-spring2-0.0.1-SNAPSHOT.jar
 ```
 
 ## テストユーザー
