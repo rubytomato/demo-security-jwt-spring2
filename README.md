@@ -1,18 +1,26 @@
-# Spring Security & JWT with Spring Boot 2.0.1 Rest API application
+# Spring Security & JWT with Spring Boot 2.0 Rest API application
+
+Development environment
+
+* Java 1.8.0
+* Spring Boot 2.0.2
+* Maven 3.5.2
+* H2
+* java-jwt 3.3.0
 
 ## Build & Run
 
-埋め込みDBのH2を利用しています。
+using an embedded database H2.
 
 ```text
 mvn clean package
 ```
 
 ```text
-java -jar .\target\demo-security-jwt-spring2-0.0.1-SNAPSHOT.jar
+java -jar .\target\demo.jar
 ```
 
-## テストユーザー
+## test user
 
 |email                  |password         |admin  |
 |:----------------------|:----------------|:------|
@@ -25,7 +33,7 @@ java -jar .\target\demo-security-jwt-spring2-0.0.1-SNAPSHOT.jar
 
 ## API
 
-### ログインAPI
+### login API
 
 認証が成功するとトークンが取得できます。このトークンは認証が必要なAPIで使用します。
 
@@ -33,7 +41,7 @@ java -jar .\target\demo-security-jwt-spring2-0.0.1-SNAPSHOT.jar
 curl -i -X POST "http://localhost:9000/app/login" -d "email=kkamimura@example.com" -d "pass=iWKw06pvj"
 ```
 
-### 認証が不要なAPI
+### No authentication required API
 
 ```text
 curl -i "http://localhost:9000/app/hello"
@@ -47,9 +55,9 @@ curl -i "http://localhost:9000/app/hello/{message}"
 curl -i -X POST "http://localhost:9000/app/hello" -d "message=world"
 ```
 
-### ロールが不要なAPI
+### These APIs do not need roles
 
-認証されているユーザーがアクセスできるAPI
+But the user needs to be authenticated.
 
 ```text
 curl -i -H "Authorization: Bearer {TOKEN}" "http://localhost:9000/app/memo/1"
@@ -59,9 +67,7 @@ curl -i -H "Authorization: Bearer {TOKEN}" "http://localhost:9000/app/memo/1"
 curl -i -H "Authorization: Bearer {TOKEN}" "http://localhost:9000/app/memo/list"
 ```
 
-### USERロールAPI
-
-USERロールを持つユーザーがアクセスできるAPI
+### These APIs requiring authentication and USER role
 
 ```text
 curl -i -H "Authorization: Bearer {TOKEN}" "http://localhost:9000/app/user"
@@ -75,9 +81,7 @@ curl -i -H "Authorization: Bearer {TOKEN}" "http://localhost:9000/app/user/echo/
 curl -i -H "Authorization: Bearer {TOKEN}" -H "Content-Type:application/json" -X POST "http://localhost:9000/app/user/echo" -d "{\"message\": \"hello world\"}"
 ```
 
-### ADMINロールAPI
-
-ADMINロールを持つユーザーがアクセスできるAPI
+### These APIs requiring authentication and ADMIN role
 
 ```text
 curl -i -H "Authorization: Bearer {TOKEN}" "http://localhost:9000/app/admin"

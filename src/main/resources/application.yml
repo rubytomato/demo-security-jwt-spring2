@@ -47,11 +47,11 @@ server:
   servlet:
     context-path: /app
 
-logging.file: demo-security-jwt-spring2.log
+logging.file: demo.log
 logging:
   file:
-    max-history: 10
     max-size: 50MB
+    max-history: 10
   level:
     root: info
     org.springframework: info
