@@ -21,7 +21,7 @@ public class UserRepositoryTests {
     private UserRepository userRepository;
 
     @Test
-    public void test() {
+    public void findByEmail() {
         User expected = testEntityManager.persistFlushFind(User.of("user_a_name", "user_a_pass", "aaa@example.com"));
 
         Optional<User> user = userRepository.findByEmail(expected.getEmail());
