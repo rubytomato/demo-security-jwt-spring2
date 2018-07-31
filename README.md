@@ -3,10 +3,10 @@
 Development environment
 
 * Java 1.8.0
-* Spring Boot 2.0.2
+* Spring Boot 2.0.4
 * H2
-* java-jwt 3.3.0
-* Maven 3.5.3
+* java-jwt 3.4.0
+* Maven 3.5.4
 
 ## Build & Run
 
@@ -39,6 +39,21 @@ java -jar .\target\demo.jar
 
 ```text
 curl -i -X POST "http://localhost:9000/app/login" -d "email=kkamimura@example.com" -d "pass=iWKw06pvj"
+```
+
+For example, the response is as follows
+
+```text
+HTTP/1.1 200
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI1IiwibmJmIjoxNTMzMDA2NDc0LCJleHAiOjE1MzMwMDcwNzQsImlhdCI6MTUzMzAwNjQ3NH0.HHrg8dGkexwgw3z06n5NGa69DLzJn--PWzlBYNQ8r3KXDLsXwJKNt7qwJK3xGHc2CP0zBi2fcdjAWV-2zs68wA
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Tue, 31 Jul 2018 03:07:54 GMT
 ```
 
 ### No authentication required API

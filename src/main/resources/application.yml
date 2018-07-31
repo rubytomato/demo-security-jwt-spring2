@@ -29,7 +29,7 @@ spring:
 # JACKSON
   jackson:
     serialization:
-      indent_output: true
+      indent-output: true
       write-dates-as-timestamps: false
       write-durations-as-timestamps: true
 # DEVTOOLS
