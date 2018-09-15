@@ -24,41 +24,55 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Memo implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "title", nullable = false, length = 255)
-    private String title;
-    @Column(name = "description", nullable = false)
-    private String description;
-    @Column(name = "done", nullable = false)
-    private Boolean done;
-    @Column(name = "updated", nullable = false)
-    private LocalDateTime updated;
+  private static final long serialVersionUID = 8836618159506901418L;
 
-    public static Memo of(String title, String description) {
-        return Memo.of(null, title, description);
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  @Column(name = "title", nullable = false, length = 255)
+  private String title;
+  @Column(name = "description", nullable = false)
+  private String description;
+  @Column(name = "done", nullable = false)
+  private Boolean done;
+  @Column(name = "updated", nullable = false)
+  private LocalDateTime updated;
 
-    public static Memo of(Long id, String title, String description) {
-        return Memo.builder()
-                .id(id)
-                .title(title)
-                .description(description)
-                .done(false)
-                .updated(LocalDateTime.now())
-                .build();
-    }
+  public static Memo of(String title, String description) {
+    return Memo.of(null, title, description);
+  }
 
-    @PrePersist
-    private void prePersist() {
-        done = false;
-        updated = LocalDateTime.now();
-    }
+  public static Memo of(Long id, String title, String description) {
+    return Memo.builder()
+        .id(id)
+        .title(title)
+        .description(description)
+        .done(false)
+        .updated(LocalDateTime.now())
+        .build();
+  }
 
-    @PreUpdate
-    private void preUpdate() {
-        updated = LocalDateTime.now();
+  public void merge(Memo memo) {
+    if (memo.title != null && memo.title.length() > 0) {
+      title = memo.title;
     }
+    if (memo.description != null && memo.description.length() > 0) {
+      description = memo.description;
+    }
+    if (memo.done != null) {
+      done = memo.done;
+    }
+  }
+
+  @PrePersist
+  private void prePersist() {
+    done = false;
+    updated = LocalDateTime.now();
+  }
+
+  @PreUpdate
+  private void preUpdate() {
+    updated = LocalDateTime.now();
+  }
 
 }

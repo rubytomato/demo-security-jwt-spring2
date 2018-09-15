@@ -23,35 +23,41 @@ import java.util.Optional;
 @Slf4j
 public class MemoController {
 
-    private final MemoService service;
+  private final MemoService service;
 
-    public MemoController(MemoService service) {
-        this.service = service;
-    }
+  public MemoController(MemoService service) {
+    this.service = service;
+  }
 
-    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Memo> id(@PathVariable(value = "id") Long id) {
-        Optional<Memo> memo = service.findById(id);
-        return memo.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+  @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public ResponseEntity<Memo> id(@PathVariable(value = "id") Long id) {
+    Optional<Memo> memo = service.findById(id);
+    return memo.map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
 
-    @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<Memo>> list(Pageable page) {
-        Page<Memo> memos = service.findAll(page);
-        return ResponseEntity.ok(memos.getContent());
-    }
+  @GetMapping(path = "list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public ResponseEntity<List<Memo>> list(Pageable page) {
+    Page<Memo> memos = service.findAll(page);
+    return ResponseEntity.ok(memos.getContent());
+  }
 
-    @PostMapping(produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public String store(@RequestBody Memo memo) {
-        service.store(memo);
-        return "success";
-    }
+  @PostMapping(produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public String store(@RequestBody Memo memo) {
+    service.store(memo);
+    return "success";
+  }
 
-    @DeleteMapping(path = "{id}", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String remove(@PathVariable(value = "id") Long id) {
-        service.removeById(id);
-        return "success";
-    }
+  @DeleteMapping(path = "{id}", produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public String update(@PathVariable(value = "id") Long id, @RequestBody Memo memo) {
+    service.updateById(id, memo);
+    return "success";
+  }
+
+  @DeleteMapping(path = "{id}", produces = MediaType.TEXT_PLAIN_VALUE)
+  public String remove(@PathVariable(value = "id") Long id) {
+    service.removeById(id);
+    return "success";
+  }
 
 }

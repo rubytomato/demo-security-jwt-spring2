@@ -1,20 +1,20 @@
 spring:
   application:
-    name: security with spring-boot 2.0
-# OUTPUT
+    name: Spring Security & JWT with spring-boot 2.0
+  # OUTPUT
   output:
     ansi:
       enabled: detect
-# DATASOURCE
+  # DATASOURCE
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
     username: sa
     password:
-#    url: jdbc:mysql://localhost:3306/demo3_db?useSSL=false
-#    username: demo_user
-#    password: demo_pass
-#    driver-class-name: com.mysql.jdbc.Driver
-# JPA
+  #    url: jdbc:mysql://localhost:3306/demo3_db?useSSL=false
+  #    username: demo_user
+  #    password: demo_pass
+  #    driver-class-name: com.mysql.jdbc.Driver
+  # JPA
   jpa:
     open-in-view: true
     generate-ddl: true
@@ -26,19 +26,19 @@ spring:
         format_sql: true
         use_sql_comments: true
         generate_statistics: false
-# JACKSON
+  # JACKSON
   jackson:
     serialization:
       indent-output: true
       write-dates-as-timestamps: false
       write-durations-as-timestamps: true
-# DEVTOOLS
-#  devtools:
-#    livereload:
-#      enabled: false
-#    restart:
-#      log-condition-evaluation-delta: true
-#      enabled: true
+  # DEVTOOLS
+  #  devtools:
+  #    livereload:
+  #      enabled: false
+  #    restart:
+  #      log-condition-evaluation-delta: true
+  #      enabled: true
   security:
     secret-key: GkD0wnqHaN6y5peyf0
 
@@ -60,4 +60,3 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type.descriptor.sql.BasicBinder: trace
     com.example.demo: debug
-
