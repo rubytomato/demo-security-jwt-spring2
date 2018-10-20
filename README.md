@@ -3,7 +3,7 @@
 Development environment
 
 * Java 1.8.0
-* Spring Boot 2.0.5
+* Spring Boot 2.0.6
 * H2
 * java-jwt 3.4.0
 * Maven 3.5.4
